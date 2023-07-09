@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  myalbums
+
+  Created by Özgür Elmaslı on 9.07.2023.
+  
+*/
+
+"core_close_button_title" = "Close";
+"core_something_went_wrong_error_message" = "Something went wrong.";
+"core_decode_error_message" = "JSON could't parsed correctly";
+"album_list_title" = "My albums";
+
