@@ -13,7 +13,12 @@ final class ShowcasePhotoHeaderView: UITableViewHeaderFooterView, ReusableView {
         let sourceUrl: String
     }
     
-    private let imageView: UIImageView = .init()
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.clipsToBounds = true
+        imageView.tintColor = .darkGray
+        return imageView
+    }()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -26,7 +31,8 @@ final class ShowcasePhotoHeaderView: UITableViewHeaderFooterView, ReusableView {
     }
     
     func populate(with viewModel: ViewModel) {
-        imageView.setImage(.url(viewModel.sourceUrl, UIImage(systemName: "photo.fill")))
+        imageView.setImage(.url(viewModel.sourceUrl,
+                                .img_showcase_placeholder))
     }
 }
 
@@ -34,11 +40,7 @@ private extension ShowcasePhotoHeaderView {
     
     func setupViews() {
         [imageView].forEach(addSubview)
-        
-        imageView.clipsToBounds = true
-        
-        imageView.tintColor = .darkGray
-        
+
         imageView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }

@@ -29,8 +29,8 @@ final class AlbumTableViewCell: UITableViewCell, ReusableView {
     }()
     
     private let userImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "person.crop.circle.fill"))
-        imageView.tintColor = .red
+        let imageView = UIImageView(image: .ic_album_user_circle)
+        imageView.tintColor = .colorResources.darkRedColor()
         
         return imageView
     }()
@@ -62,16 +62,19 @@ final class AlbumTableViewCell: UITableViewCell, ReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupViews() {
+    func populate(with viewModel: ViewModel) {
+        titleLabel.text = viewModel.title
+        userIdLabel.text = viewModel.userId
+    }
+}
+
+private extension AlbumTableViewCell {
+    
+    func setupViews() {
         [container].forEach(contentView.addSubview)
         [userImageView, userIdLabel].forEach(userContainer.addArrangedSubview)
         [titleLabel, userContainer].forEach(container.addArrangedSubview)
         
         container.snp.makeConstraints { $0.edges.equalToSuperview() }
-    }
-    
-    func populate(with viewModel: ViewModel) {
-        titleLabel.text = viewModel.title
-        userIdLabel.text = viewModel.userId
     }
 }

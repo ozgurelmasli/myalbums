@@ -7,10 +7,7 @@
 
 import UIKit
 
-protocol PhotoListDisplayLayer: AnyObject {
-    func reloadUI()
-    func navigateTo(_ controller: UIViewController)
-}
+protocol PhotoListDisplayLayer: BaseDisplayLayer { }
 
 final class PhotoListController: UIViewController {
     
@@ -63,9 +60,5 @@ extension PhotoListController: PhotoListDisplayLayer {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-    }
-    
-    func navigateTo(_ controller: UIViewController) {
-        self.present(controller, animated: true)
     }
 }

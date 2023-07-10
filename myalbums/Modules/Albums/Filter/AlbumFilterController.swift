@@ -1,29 +1,26 @@
 //
-//  AlbumListController.swift
+//  AlbumFilterController.swift
 //  myalbums
 //
-//  Created by Özgür Elmaslı on 9.07.2023.
+//  Created by Özgür Elmaslı on 10.07.2023.
 //
 
 import UIKit
-import SnapKit
 
-protocol AlbumListDisplayLayer: BaseDisplayLayer { }
+protocol AlbumFilterDisplayLayer: BaseDisplayLayer {}
 
-final class AlbumListController: UIViewController {
+final class AlbumFilterController: UIViewController {
     
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.register(AlbumTableViewCell.self)
+        tableView.register(AlbumFilterTableViewCell.self)
         return tableView
     }()
     
-    private let filterButton: TButton = .init()
+    private var viewModel: AlbumFilterViewModelProtocol
     
-    private let viewModel: AlbumListViewModelProtocol
-    
-    init(viewModel: AlbumListViewModelProtocol) {
+    init(viewModel: AlbumFilterViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.view = self
@@ -35,16 +32,15 @@ final class AlbumListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         setupViews()
         viewModel.viewDidLoad?()
     }
 }
 
-private extension AlbumListController {
+private extension AlbumFilterController {
     
     func setupViews() {
-        title = .stringResources.album_list_title()
         view.backgroundColor = .white
         
         tableView.delegate = viewModel.dataSource
@@ -52,19 +48,14 @@ private extension AlbumListController {
         
         [tableView].forEach(view.addSubview)
         tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        
-        let barButtonItem = UIBarButtonItem(customView: filterButton)
-        navigationItem.rightBarButtonItem = barButtonItem
     }
 }
 
-
-extension AlbumListController: AlbumListDisplayLayer {
+extension AlbumFilterController: AlbumFilterDisplayLayer {
     
     func reloadUI() {
         DispatchQueue.main.async {
             self.tableView.reloadData()
-            self.filterButton.populate(with: self.viewModel.getFilterButtonViewModel())
         }
     }
 }

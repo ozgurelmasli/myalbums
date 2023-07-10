@@ -60,7 +60,7 @@ final class PhotoTableViewCell: UITableViewCell, ReusableView {
     }
     
     func populate(with viewModel: ViewModel) {
-        photoImageView.setImage(.url(viewModel.thumbnailUrl, UIImage(systemName: "photo.on.rectangle")))
+        photoImageView.setImage(.url(viewModel.thumbnailUrl, .img_photo_placeholder))
         titleLabel.text = viewModel.title
     }
 }

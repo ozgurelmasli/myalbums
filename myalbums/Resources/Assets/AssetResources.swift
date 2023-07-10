@@ -15,4 +15,13 @@ final class AssetResources {
         cache.memoryStorage.config.totalCostLimit = 1024 * 1024 * 10
         cache.diskStorage.config.sizeLimit = 1024 * 1024 * 100
     }
+    
+    /// Color Resources
+    static func colors() -> _R.color {
+        return R.color
+    }
+    
+    static func images() -> _R.image {
+        return R.image
+    }
 }

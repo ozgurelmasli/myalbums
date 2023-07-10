@@ -8,4 +8,5 @@
 import UIKit
 
 typealias VoidHandler = () -> Void
-typealias IndexPathHandler = (IndexPath) -> Void
+typealias IntHandler = (Int?) -> Void
+typealias IndexPathHandler = (IndexPath?) -> Void

@@ -40,8 +40,13 @@ private extension PhotoListViewModel {
     
     func bind() {
         dataSource.didSelectHandler = { [weak self] indexPath in
-            guard let tappedPhoto = self?.photos[safe: indexPath.row] else { return }
-            self?.view?.navigateTo(PhotoPreviewController(viewModel: PhotoPreviewViewModel.init(imageUrl: tappedPhoto.url.orEmpty)))
+            guard
+                let row = indexPath?.row,
+                let tappedPhoto = self?.photos[safe: row]
+            else { return }
+            let previewViewModel = PhotoPreviewViewModel(imageUrl: tappedPhoto.url.orEmpty)
+            let controller = PhotoPreviewController(viewModel: previewViewModel)
+            self?.view?.present(controller)
         }
     }
     
@@ -66,7 +71,7 @@ private extension PhotoListViewModel {
         self.photos = filterByAlbumId(photoList)
         dataSource.rows = photos.map { PhotoTableViewCell.ViewModel(thumbnailUrl: $0.thumbnailUrl.orEmpty, title: $0.title.orEmpty) }
         dataSource.headerViewModel = .init(sourceUrl: (photos.randomElement()?.url).orEmpty)
-        view?.reloadUI()
+        view?.reloadUI?()
     }
     
     func filterByAlbumId( _ photos: [Photo]) -> [Photo] {

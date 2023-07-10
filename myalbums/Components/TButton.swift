@@ -17,6 +17,7 @@ final class TButton: UIButton {
     
     struct ViewModel {
         var title: String?
+        var image: UIImage? = nil
         var style: Style = .clearBlack
         var onTap: VoidHandler?
     }
@@ -40,12 +41,14 @@ final class TButton: UIButton {
         self.viewModel = viewModel
         clearPopulate()
         
+        setImage(viewModel.image, for: .normal)
         setTitle(viewModel.title.orEmpty, for: .normal)
         setStyle()
     }
     
     private func clearPopulate() {
         setTitle(nil, for: .normal)
+        setImage(nil, for: .normal)
         backgroundColor = .clear
         layer.borderColor = nil
         layer.borderWidth = .zero

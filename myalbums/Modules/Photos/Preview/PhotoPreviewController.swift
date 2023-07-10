@@ -7,9 +7,7 @@
 
 import UIKit
 
-protocol PhotoPreviewDisplayLayer: AnyObject {
-    func dismiss()
-}
+protocol PhotoPreviewDisplayLayer: BaseDisplayLayer { }
 
 final class PhotoPreviewController: UIViewController {
     
@@ -50,9 +48,4 @@ final class PhotoPreviewController: UIViewController {
     }
 }
 
-extension PhotoPreviewController: PhotoPreviewDisplayLayer {
-    
-    func dismiss() {
-        dismiss(animated: true)
-    }
-}
+extension PhotoPreviewController: PhotoPreviewDisplayLayer { }
