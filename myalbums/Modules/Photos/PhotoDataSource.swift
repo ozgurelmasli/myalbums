@@ -8,11 +8,13 @@
 import UIKit
 
 final class PhotoDataSource: NSObject {
-    
+    /// didSelectRowAt func handler
     var didSelectHandler: IndexPathHandler?
     
+    /// PhotoTableViewCell rows
     var rows: [PhotoTableViewCell.ViewModel] = []
     
+    /// ShowcasePhotoHeaderView header
     var headerViewModel: ShowcasePhotoHeaderView.ViewModel?
 }
 
@@ -33,7 +35,6 @@ extension PhotoDataSource: UITableViewDataSource {
         if let item = rows[safe: indexPath.row] {
             cell.populate(with: item)
         }
-        
         return cell
     }
     
@@ -42,7 +43,6 @@ extension PhotoDataSource: UITableViewDataSource {
         if let headerViewModel = headerViewModel {
             headerView.populate(with: headerViewModel)
         }
-    
         return headerView
     }
 }
