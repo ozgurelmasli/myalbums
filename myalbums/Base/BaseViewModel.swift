@@ -7,7 +7,10 @@
 
 import Foundation
 
-@objc
 protocol BaseViewModelProtocol {
-    @objc optional func viewDidLoad()
+    func viewDidLoad()
+}
+
+extension BaseViewModelProtocol {
+    func viewDidLoad() { }
 }

@@ -89,13 +89,13 @@ private extension AlbumListViewModel {
         dataSource.rows = albums
             .filter { $0.userId == selectedUserId }
             .map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
-        view?.reloadUI?()
+        view?.reloadUI()
     }
     
     func resetFilter() {
         dataSource.rows = albums
             .map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
-        view?.reloadUI?()
+        view?.reloadUI()
     }
 }
 
@@ -127,7 +127,7 @@ private extension AlbumListViewModel {
         dataSource.rows = albumList.map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
         DispatchQueue.main.async {
             self.view?.stopLoading()
-            self.view?.reloadUI?()
+            self.view?.reloadUI()
         }
     }
 }

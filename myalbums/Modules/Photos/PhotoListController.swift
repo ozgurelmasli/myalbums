@@ -20,7 +20,7 @@ final class PhotoListController: UIViewController {
         return tableView
     }()
     
-    private let viewModel: PhotoListViewModelProtocol
+    private var viewModel: PhotoListViewModelProtocol
     
     init(viewModel: PhotoListViewModelProtocol) {
         self.viewModel = viewModel
@@ -36,7 +36,7 @@ final class PhotoListController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-        viewModel.viewDidLoad?()
+        viewModel.viewDidLoad()
     }
 }
 

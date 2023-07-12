@@ -22,7 +22,7 @@ final class AlbumListController: UIViewController {
     
     private let filterButton: TButton = .init()
     
-    private let viewModel: AlbumListViewModelProtocol
+    private var viewModel: AlbumListViewModelProtocol
     
     init(viewModel: AlbumListViewModelProtocol) {
         self.viewModel = viewModel
@@ -38,7 +38,7 @@ final class AlbumListController: UIViewController {
         super.viewDidLoad()
     
         setupViews()
-        viewModel.viewDidLoad?()
+        viewModel.viewDidLoad()
     }
 }
 

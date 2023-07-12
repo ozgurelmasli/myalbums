@@ -41,7 +41,7 @@ private extension AlbumFilterViewModel {
     func getUserList() {
         dataSource.rows = userIds.map { .init(userId: $0.toString, isActiveFilter: $0 == selectedUserId)}
         
-        view?.reloadUI?()
+        view?.reloadUI()
     }
 }
 

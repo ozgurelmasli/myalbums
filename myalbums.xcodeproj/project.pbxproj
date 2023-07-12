@@ -340,18 +340,10 @@
 		EE27D29B2A59AD8F00134C1F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				EE27D29C2A59ADF400134C1F /* Configuration */,
 				EE0C9E5A2A5771AB001824F0 /* AppDelegate.swift */,
 				EE0C9E5C2A5771AB001824F0 /* SceneDelegate.swift */,
 			);
 			path = App;
-			sourceTree = "<group>";
-		};
-		EE27D29C2A59ADF400134C1F /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Configuration;
 			sourceTree = "<group>";
 		};
 		EE27D2A02A5AB8A300134C1F /* Albums */ = {

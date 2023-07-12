@@ -81,7 +81,7 @@ private extension PhotoListViewModel {
         dataSource.headerViewModel = ShowcasePhotoHeaderView.ViewModel(sourceUrl: (photos.randomElement()?.url).orEmpty)
         
         DispatchQueue.main.async {
-            self.view?.reloadUI?()
+            self.view?.reloadUI()
         }
     }
 }

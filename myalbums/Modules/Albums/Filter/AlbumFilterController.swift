@@ -35,7 +35,7 @@ final class AlbumFilterController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-        viewModel.viewDidLoad?()
+        viewModel.viewDidLoad()
     }
 }
 

@@ -7,6 +7,10 @@
 
 import Foundation
 
-@objc protocol ReloadUICompatible: AnyObject {
-    @objc optional func reloadUI()
+protocol ReloadUICompatible: AnyObject {
+    func reloadUI()
+}
+
+extension ReloadUICompatible {
+    func reloadUI() { }
 }
