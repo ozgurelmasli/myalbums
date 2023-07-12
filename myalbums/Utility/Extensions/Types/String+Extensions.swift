@@ -9,5 +9,4 @@ extension String {
     
     /// String Resources
     static let stringResources = LanguageResources.strings()
-    
 }

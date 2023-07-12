@@ -15,7 +15,6 @@ protocol NetworkTargetType: TargetType {
 extension NetworkTargetType {
     
     var baseURL: URL {
-        //TODO: -> Add as configure item
         return URL(string: "https://jsonplaceholder.typicode.com")!
     }
     

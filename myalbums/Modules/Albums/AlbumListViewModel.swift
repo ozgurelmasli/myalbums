@@ -41,8 +41,26 @@ final class AlbumListViewModel: AlbumListViewModelProtocol {
         }
         return buttonViewModel
     }
+}
+
+//MARK: -> Action Handlers
+private extension AlbumListViewModel {
     
-    private func filterButtonTapped() {
+    func bind() {
+        dataSource.didSelectHandler = { [weak self] indexPath in
+            self?.didRowSelect(indexPath)
+        }
+    }
+    
+    func didRowSelect( _ indexPath: IndexPath?) {
+        guard let row = indexPath?.row, let album = albums[safe: row] else { return }
+        
+        let viewModel = PhotoListViewModel(album: album)
+        let controller = PhotoListController(viewModel: viewModel)
+        view?.navigateTo(controller)
+    }
+    
+    func filterButtonTapped() {
         let userIds = self.albums.compactMap { $0.userId }
         let uniques = Set(userIds).sorted()
         
@@ -58,18 +76,25 @@ final class AlbumListViewModel: AlbumListViewModelProtocol {
         let controller = AlbumFilterController(viewModel: filterViewModel)
         view?.present(controller)
     }
+}
+
+//MARK: -> Filter actions
+private extension AlbumListViewModel {
     
-    private func filterAlbums() {
+    func filterAlbums() {
         guard let selectedUserId = filteredUserId else {
             resetFilter()
             return
         }
-        dataSource.rows = albums.filter { $0.userId == selectedUserId }.map { .init(title: $0.title ?? "", userId: "\($0.userId ?? 0)") }
+        dataSource.rows = albums
+            .filter { $0.userId == selectedUserId }
+            .map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
         view?.reloadUI?()
     }
     
-    private func resetFilter() {
-        dataSource.rows = albums.map { .init(title: $0.title ?? "", userId: "\($0.userId ?? 0)") }
+    func resetFilter() {
+        dataSource.rows = albums
+            .map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
         view?.reloadUI?()
     }
 }
@@ -79,13 +104,16 @@ private extension AlbumListViewModel {
     
     /// GET Album List
     func getAlbumsList() {
+        view?.startLoading()
         let service = AlbumsService.getAlbums
         Task {
             do {
                 let albumList: [Album]? = try await network.request(target: service)
                 handleResponse(albumList)
             } catch let error as TServiceError {
-                print(error)
+                DispatchQueue.main.async {
+                    self.view?.showResult(title: .stringResources.core_default_error_title(), message: error.message, buttonTitle: nil, actionHandler: nil)
+                }
             }
         }
     }
@@ -93,31 +121,13 @@ private extension AlbumListViewModel {
     /// Handle Album List Response
     func handleResponse( _ albumList: [Album]?) {
         guard let albumList = albumList else {
-            //TODO: -> throw
             return
         }
         self.albums = albumList
-        dataSource.rows = albumList.map { .init(title: $0.title ?? "", userId: "\($0.userId ?? 0)") }
-        view?.reloadUI?()
-    }
-}
-
-private extension AlbumListViewModel {
-    
-    func bind() {
-        dataSource.didSelectHandler = { [weak self] indexPath in
-            guard
-                let row = indexPath?.row,
-                let album = self?.albums[safe: row]
-            else { return }
-            self?.navigateToPhotos(album)
+        dataSource.rows = albumList.map { .init(title: $0.title.orEmpty, userId: $0.userId.orZero.toString) }
+        DispatchQueue.main.async {
+            self.view?.stopLoading()
+            self.view?.reloadUI?()
         }
     }
-    
-    func navigateToPhotos( _ selectedAlbum: Album) {
-        let viewModel = PhotoListViewModel(album: selectedAlbum)
-        let controller = PhotoListController(viewModel: viewModel)
-        view?.navigateTo(controller)
-    }
 }
-

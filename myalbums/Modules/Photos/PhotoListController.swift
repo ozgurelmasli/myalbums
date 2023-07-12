@@ -50,6 +50,7 @@ private extension PhotoListController {
         tableView.dataSource = viewModel.dataSource
         
         [tableView].forEach(view.addSubview)
+        
         tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }
@@ -57,8 +58,6 @@ private extension PhotoListController {
 extension PhotoListController: PhotoListDisplayLayer {
     
     func reloadUI() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
 }

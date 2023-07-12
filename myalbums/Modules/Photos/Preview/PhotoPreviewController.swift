@@ -30,16 +30,25 @@ final class PhotoPreviewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+    }
+}
+
+private extension PhotoPreviewController {
+    
+    func setupViews() {
         view.backgroundColor = .black
-        [imageView, closeButton].forEach(view.addSubview)
         
+        closeButton.populate(with: viewModel.getCloseButtonViewModel())
         imageView.setImage(.url(viewModel.imageSourceUrl, nil))
+        
+        [imageView, closeButton].forEach(view.addSubview)
         
         imageView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.height.equalTo(600)
         }
-        closeButton.populate(with: viewModel.getCloseButtonViewModel())
+        
         closeButton.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(BaseConstants.padding)
             make.trailing.equalToSuperview().inset(BaseConstants.padding)

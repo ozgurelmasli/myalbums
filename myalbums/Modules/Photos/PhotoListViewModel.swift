@@ -5,6 +5,8 @@
 //  Created by Özgür Elmaslı on 9.07.2023.
 //
 
+import Foundation
+
 protocol PhotoListViewModelProtocol: BaseViewModelProtocol {
     var view: PhotoListDisplayLayer? { get set }
     var navigationTitle: String { get }
@@ -40,17 +42,21 @@ private extension PhotoListViewModel {
     
     func bind() {
         dataSource.didSelectHandler = { [weak self] indexPath in
-            guard
-                let row = indexPath?.row,
-                let tappedPhoto = self?.photos[safe: row]
-            else { return }
-            let previewViewModel = PhotoPreviewViewModel(imageUrl: tappedPhoto.url.orEmpty)
-            let controller = PhotoPreviewController(viewModel: previewViewModel)
-            self?.view?.present(controller)
+            self?.didRowSelect(indexPath)
         }
     }
     
-    /// GET Photo List
+    func didRowSelect( _ indexPath: IndexPath?) {
+        guard let row = indexPath?.row, let photo = photos[safe: row] else { return }
+        
+        let previewViewModel = PhotoPreviewViewModel(imageUrl: photo.url.orEmpty)
+        let controller = PhotoPreviewController(viewModel: previewViewModel)
+        view?.present(controller)
+    }
+}
+
+private extension PhotoListViewModel {
+    
     func getPhotoList() {
         let service = PhotosService.getPhotos
         Task {
@@ -58,21 +64,30 @@ private extension PhotoListViewModel {
                 let photoList: [Photo]? = try await network.request(target: service)
                 handleResponse(photoList)
             } catch let error as TServiceError {
-                print(error)
+                DispatchQueue.main.async {
+                    self.view?.showResult(title: .stringResources.core_default_error_title(), message: error.message, buttonTitle: nil, actionHandler: nil)
+                }
             }
         }
     }
     
     func handleResponse( _ photoList: [Photo]?) {
         guard let photoList = photoList, !photoList.isEmpty else {
-            // TODO: empty
             return
         }
-        self.photos = filterByAlbumId(photoList)
+        
+        photos = filterByAlbumId(photoList)
         dataSource.rows = photos.map { PhotoTableViewCell.ViewModel(thumbnailUrl: $0.thumbnailUrl.orEmpty, title: $0.title.orEmpty) }
-        dataSource.headerViewModel = .init(sourceUrl: (photos.randomElement()?.url).orEmpty)
-        view?.reloadUI?()
+        dataSource.headerViewModel = ShowcasePhotoHeaderView.ViewModel(sourceUrl: (photos.randomElement()?.url).orEmpty)
+        
+        DispatchQueue.main.async {
+            self.view?.reloadUI?()
+        }
     }
+}
+
+//MARK: -> Filter Actions
+private extension PhotoListViewModel {
     
     func filterByAlbumId( _ photos: [Photo]) -> [Photo] {
         guard let albumId = album.id else { return photos }

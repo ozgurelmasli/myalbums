@@ -15,6 +15,7 @@ final class AlbumFilterController: UIViewController {
         let tableView = UITableView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(AlbumFilterTableViewCell.self)
+        tableView.accessibilityIdentifier = "filterTableViewIdentifier"
         return tableView
     }()
     
@@ -47,6 +48,7 @@ private extension AlbumFilterController {
         tableView.dataSource = viewModel.dataSource
         
         [tableView].forEach(view.addSubview)
+        
         tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }
@@ -54,8 +56,6 @@ private extension AlbumFilterController {
 extension AlbumFilterController: AlbumFilterDisplayLayer {
     
     func reloadUI() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.tableView.reloadData()
     }
 }

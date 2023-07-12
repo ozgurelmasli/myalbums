@@ -6,8 +6,10 @@
   
 */
 
+"core_default_error_title" = "Error Occurred.";
+"core_result_default_button_title" = "Close";
+"core_loading_title" = "Loading...";
 "core_close_button_title" = "Close";
 "core_something_went_wrong_error_message" = "Something went wrong.";
 "core_decode_error_message" = "JSON could't parsed correctly";
 "album_list_title" = "My albums";
-

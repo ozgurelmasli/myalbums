@@ -11,10 +11,15 @@ import Kingfisher
 extension UIImageView {
     
     enum ImageSourceType {
+        /// Remote resource, Placeholder Image
         case url(String, UIImage?)
+        
+        /// Local
         case image(UIImage)
     }
     
+    /// Set Image depends on resource type
+    /// - Parameter source: Remote or Local
     func setImage( _ source: ImageSourceType) {
         switch source {
         case .image(let sourceImage):

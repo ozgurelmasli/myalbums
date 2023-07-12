@@ -16,3 +16,24 @@ extension Optional where Wrapped == String {
         }
     }
 }
+
+
+extension Optional where Wrapped == Int {
+    
+    var orZero: Int {
+        switch self {
+        case .none:
+            return .zero
+        case .some(let wrapped):
+            return wrapped
+        }
+    }
+}
+
+
+extension Int {
+    
+    var toString: String {
+        return "\(self)"
+    }
+}

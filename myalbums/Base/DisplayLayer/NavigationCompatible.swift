@@ -14,6 +14,12 @@ protocol NavigationCompatible: AnyObject {
     func dismiss()
 }
 
+extension NavigationCompatible {
+    func navigateTo( _ controller: UIViewController) { }
+    func present( _ controller: UIViewController) { }
+    func dismiss() { }
+}
+
 extension UIViewController: NavigationCompatible {
     func navigateTo(_ controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)

@@ -9,6 +9,10 @@ import UIKit
 
 final class PhotoTableViewCell: UITableViewCell, ReusableView {
     
+    private enum Constants {
+        static let imageSize: CGFloat = 75
+    }
+    
     struct ViewModel {
         let thumbnailUrl: String
         let title: String
@@ -51,11 +55,8 @@ final class PhotoTableViewCell: UITableViewCell, ReusableView {
     private func setupViews() {
         [container].forEach(contentView.addSubview)
         [photoImageView, titleLabel].forEach(container.addArrangedSubview)
-        
-        photoImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(75)
-        }
-        
+
+        photoImageView.snp.makeConstraints { $0.height.width.equalTo(Constants.imageSize) }
         container.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
     

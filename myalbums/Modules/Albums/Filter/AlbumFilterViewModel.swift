@@ -5,6 +5,8 @@
 //  Created by Özgür Elmaslı on 10.07.2023.
 //
 
+import Foundation
+
 protocol AlbumFilterViewModelProtocol: BaseViewModelProtocol {
     var view: AlbumFilterDisplayLayer? { get set }
     var onSelect: IntHandler? { get set }
@@ -33,21 +35,29 @@ final class AlbumFilterViewModel: AlbumFilterViewModelProtocol {
     }
 }
 
+//MARK: -> Data Prep
+private extension AlbumFilterViewModel {
+    
+    func getUserList() {
+        dataSource.rows = userIds.map { .init(userId: $0.toString, isActiveFilter: $0 == selectedUserId)}
+        
+        view?.reloadUI?()
+    }
+}
+
+//MARK: -> Action Handlers
 private extension AlbumFilterViewModel {
     
     func bind() {
         dataSource.didSelectHandler = { [weak self] indexPath in
-            guard
-                let row = indexPath?.row,
-                let userId = self?.userIds[safe: row]
-            else { return }
-            self?.onSelect?(userId)
-            self?.view?.dismiss()
+            self?.didRowSelect(indexPath)
         }
     }
     
-    func getUserList() {
-        dataSource.rows = userIds.map { .init(userId: "\($0)", isActiveFilter: $0 == selectedUserId)}
-        view?.reloadUI?()
+    func didRowSelect( _ indexPath: IndexPath?) {
+        guard let row = indexPath?.row, let userId = userIds[safe: row] else { return }
+        
+        onSelect?(userId)
+        view?.dismiss()
     }
 }

@@ -8,7 +8,10 @@
 import UIKit
 
 final class AlbumDataSource: NSObject {
+    /// didSelectRowAt func handler
     var didSelectHandler: IndexPathHandler?
+    
+    /// AlbumTableViewCell rows
     var rows: [AlbumTableViewCell.ViewModel] = []
 }
 

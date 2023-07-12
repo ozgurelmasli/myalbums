@@ -16,6 +16,7 @@ final class AlbumListController: UIViewController {
         let tableView = UITableView()
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(AlbumTableViewCell.self)
+        tableView.accessibilityIdentifier = "albumListIdentifier"
         return tableView
     }()
     
@@ -50,11 +51,13 @@ private extension AlbumListController {
         tableView.delegate = viewModel.dataSource
         tableView.dataSource = viewModel.dataSource
         
-        [tableView].forEach(view.addSubview)
-        tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
-        
         let barButtonItem = UIBarButtonItem(customView: filterButton)
+        filterButton.accessibilityIdentifier = "filterButtonIdentifier"
         navigationItem.rightBarButtonItem = barButtonItem
+        
+        [tableView].forEach(view.addSubview)
+        
+        tableView.snp.makeConstraints { $0.edges.equalToSuperview() }
     }
 }
 
@@ -62,9 +65,7 @@ private extension AlbumListController {
 extension AlbumListController: AlbumListDisplayLayer {
     
     func reloadUI() {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-            self.filterButton.populate(with: self.viewModel.getFilterButtonViewModel())
-        }
+        tableView.reloadData()
+        filterButton.populate(with: viewModel.getFilterButtonViewModel())
     }
 }

@@ -51,7 +51,7 @@ private extension TLabel {
             textColor = .black
             font = .font(.black, size: Constants.size28)
         case .smallTitle:
-            textColor = .black
+            textColor = .black.withAlphaComponent(0.6)
             font = .font(.medium, size: Constants.size16)
         }
     }

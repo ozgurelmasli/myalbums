@@ -17,6 +17,7 @@ final class ShowcasePhotoHeaderView: UITableViewHeaderFooterView, ReusableView {
         let imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.tintColor = .darkGray
+        
         return imageView
     }()
     

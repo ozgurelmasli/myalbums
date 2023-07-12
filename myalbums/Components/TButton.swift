@@ -23,8 +23,11 @@ final class TButton: UIButton {
     }
     
     enum Style {
-        /// Color -> .clear, TextColor -> .white, Font -> Medium, 18
+        /// Color -> .clear, TextColor -> .Black, Font -> Medium, 18
         case clearBlack
+        
+        /// Color -> .black, TextColor -> .white, Font -> Medium, 18
+        case primary
     }
     
     override init(frame: CGRect) {
@@ -69,6 +72,11 @@ private extension TButton {
         case .clearBlack:
             setTitleColor(.white, for: .normal)
             backgroundColor = .clear
+            titleLabel?.font = .font(.medium, size: 18)
+        case .primary:
+            setTitleColor(.white, for: .normal)
+            backgroundColor = .black
+            layer.cornerRadius = BaseConstants.radius
             titleLabel?.font = .font(.medium, size: 18)
         }
     }
