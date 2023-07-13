@@ -38,14 +38,14 @@ final class TLabel: UILabel {
 
 private extension TLabel {
     
-    private func commonInit() {
+    func commonInit() {
         numberOfLines = 0
         lineBreakMode = .byCharWrapping
 
         setStyle()
     }
     
-    private func setStyle() {
+    func setStyle() {
         switch style {
         case .largeTitle:
             textColor = .black

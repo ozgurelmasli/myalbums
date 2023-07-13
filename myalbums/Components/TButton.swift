@@ -48,25 +48,25 @@ final class TButton: UIButton {
         setTitle(viewModel.title.orEmpty, for: .normal)
         setStyle()
     }
+}
+
+private extension TButton {
     
-    private func clearPopulate() {
+    func clearPopulate() {
         setTitle(nil, for: .normal)
         setImage(nil, for: .normal)
         backgroundColor = .clear
         layer.borderColor = nil
         layer.borderWidth = .zero
     }
-}
-
-private extension TButton {
     
-    private func commonInit() {
+    func commonInit() {
         snp.makeConstraints { $0.height.equalTo(Constants.defaultHeight) }
 
         addTarget(self, action: #selector(didButtonTapped), for: .touchUpInside)
     }
     
-    private func setStyle() {
+    func setStyle() {
         guard let style = viewModel?.style else { return }
         switch style {
         case .clearBlack:
@@ -82,7 +82,7 @@ private extension TButton {
     }
     
     @objc
-    private func didButtonTapped() {
+    func didButtonTapped() {
         viewModel?.onTap?()
     }
 }

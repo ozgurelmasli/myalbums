@@ -144,8 +144,9 @@ final class AlbumListViewModelTests: XCTestCase {
             
             // Execute
             sut.dataSource.didSelectHandler?(indexPath)
+            
             // Verify
-            let expectation = XCTestExpectation(description: "error UI show func should call after catch error")
+            let expectation = XCTestExpectation(description: "navigation func should call after didSelectAction")
         
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 expectation.fulfill()
