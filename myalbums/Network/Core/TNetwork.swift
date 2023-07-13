@@ -9,7 +9,7 @@ import Moya
 
 /// Network Layer
 protocol TNetworkProtocol {
-    /// Network Request func
+    /// Retrieve data from remote network.
     /// - Parameter target: NetworkTargetType
     /// - Returns: Encodable & Decodable type
     func request<T,R>(target: T) async throws -> R? where T: NetworkTargetType, R: Decodable, R: Encodable

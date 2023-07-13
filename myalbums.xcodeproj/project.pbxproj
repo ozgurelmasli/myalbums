@@ -71,6 +71,7 @@
 		EE4ADBD72A5E0741004ECE8D /* AlbumListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4ADBD62A5E0741004ECE8D /* AlbumListViewModelTests.swift */; };
 		EE4ADBD92A5E0F29004ECE8D /* TestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4ADBD82A5E0F29004ECE8D /* TestUITests.swift */; };
 		EE8203632A5E1AF60039AF36 /* AlbumListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8203622A5E1AF60039AF36 /* AlbumListUITests.swift */; };
+		EE82036A2A5FC7FA0039AF36 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE8203692A5FC7FA0039AF36 /* Int+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +165,7 @@
 		EE4ADBD62A5E0741004ECE8D /* AlbumListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListViewModelTests.swift; sourceTree = "<group>"; };
 		EE4ADBD82A5E0F29004ECE8D /* TestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUITests.swift; sourceTree = "<group>"; };
 		EE8203622A5E1AF60039AF36 /* AlbumListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumListUITests.swift; sourceTree = "<group>"; };
+		EE8203692A5FC7FA0039AF36 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		F3168CA9766A90E6A6B9BBE9 /* Pods-myalbums-myalbumsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-myalbums-myalbumsUITests.debug.xcconfig"; path = "Target Support Files/Pods-myalbums-myalbumsUITests/Pods-myalbums-myalbumsUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -569,6 +571,7 @@
 				EE27D2A52A5AB9A300134C1F /* String+Extensions.swift */,
 				EE27D2D82A5AF8AE00134C1F /* Array+Extensions.swift */,
 				EE27D2E32A5B463C00134C1F /* Optional+Extensions.swift */,
+				EE8203692A5FC7FA0039AF36 /* Int+Extensions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -871,6 +874,7 @@
 				EE27D2DF2A5B456B00134C1F /* PhotoTableViewCell.swift in Sources */,
 				EE27D2E82A5B48F100134C1F /* UIStackView+Extensions.swift in Sources */,
 				EE27D2F22A5B611400134C1F /* PhotoPreviewViewModel.swift in Sources */,
+				EE82036A2A5FC7FA0039AF36 /* Int+Extensions.swift in Sources */,
 				EE27D2F62A5C9E7100134C1F /* BaseDisplayLayer.swift in Sources */,
 				EE27D30E2A5CC48600134C1F /* LoadingView.swift in Sources */,
 				EE27D2E42A5B463C00134C1F /* Optional+Extensions.swift in Sources */,

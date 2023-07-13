@@ -29,11 +29,3 @@ extension Optional where Wrapped == Int {
         }
     }
 }
-
-
-extension Int {
-    
-    var toString: String {
-        return "\(self)"
-    }
-}

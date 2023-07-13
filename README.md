@@ -89,6 +89,7 @@ If the project had a bigger scope, the following enhancements could be considere
     - The error handler in the Network can be made more complex by providing a PluginType, allowing us to intercept specific cases like a `401` error. ex.
 - By extracting BaseResponse structures, we can make the model returned from the backend more generic
 - Listening network connection checks, we can throw internet connection errors throughout the app.
-- By adding a retry action into **TNetwork**, we can handle cases that encounter errors at regular intervals.
+- By adding a **retry mechanism** into **TNetwork**, we can handle cases that encounter errors at regular intervals.
 - Instead of making the viewModel massive in cases of heavy network flows, we can create **Worker** classes and transfer the necessary request controls to these classes.
 - If there are complex flows with multiple screens, we can add a **coordinator** layer to control the flow through controllers using enums. (convert to mvvm-c if needed)
+- Increasing test coverage should be prioritized for future improvements, ensuring comprehensive testing of all components and edge cases to enhance code reliability and maintainability.

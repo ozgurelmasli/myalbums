@@ -9,6 +9,7 @@ import Moya
 
 /// Extensions Layer for Default Moya TargetType
 protocol NetworkTargetType: TargetType {
+    /// Moya plugin, triggered function before request and after receive data from network
     var plugins: [PluginType] { get }
 }
 

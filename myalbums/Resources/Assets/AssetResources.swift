@@ -12,6 +12,7 @@ final class AssetResources {
     static func configure() {
         let cache = ImageCache.default
         
+        // Time interval 2 minutes.
         cache.memoryStorage.config.totalCostLimit = 1024 * 1024 * 10
         cache.diskStorage.config.sizeLimit = 1024 * 1024 * 100
     }
@@ -21,6 +22,7 @@ final class AssetResources {
         return R.color
     }
     
+    /// Image Resources
     static func images() -> _R.image {
         return R.image
     }
